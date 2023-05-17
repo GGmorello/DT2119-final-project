@@ -1,0 +1,5 @@
+pennylane
+qiskit
+tensorflow
+librosa
+tqdm
