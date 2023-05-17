@@ -67,23 +67,25 @@ def generate_quantum_speech(x_train, x_valid, kernel_radius):
     return np.asarray(q_train), np.asarray(q_valid)
 
 
-def plot_accuracy_loss(q_history, x_history, v_history, data_ix):
+def plot_accuracy_loss(att_history, qatt_history, cnn_history, qcnn_history, data_ix):
     """Plots training accuracy and loss."""
     plt.figure()
     plt.style.use("seaborn")
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 9))
 
-    ax1.plot(v_history.history["val_accuracy"], "-ok", label="Baseline Attn-BiLSTM")
-    ax1.plot(q_history.history["val_accuracy"], "-ob", label="With Quanv Layer")
-    ax1.plot(x_history.history["val_accuracy"], "-og", label="With Conv Layer")
+    ax1.plot(att_history.history["val_accuracy"], "-ok", label="Baseline Attn-BiLSTM")
+    ax1.plot(qatt_history.history["val_accuracy"], "-ob", label="Attention With Quanv Layer")
+    ax1.plot(cnn_history.history["val_accuracy"], "-ob", label="Baseline CNN")
+    ax1.plot(qcnn_history.history["val_accuracy"], "-og", label="Quantum CNN")
     ax1.set_ylabel("Accuracy")
     ax1.set_ylim([0, 1])
     ax1.set_xlabel("Epoch")
     ax1.legend()
 
-    ax2.plot(v_history.history["val_loss"], "-ok", label="Baseline Attn-BiLSTM")
-    ax2.plot(q_history.history["val_loss"], "-ob", label="With Quanv Layer")
-    ax2.plot(x_history.history["val_loss"], "-og", label="With Conv Layer")
+    ax2.plot(att_history.history["val_loss"], "-ok", label="Baseline Attn-BiLSTM")
+    ax2.plot(qatt_history.history["val_loss"], "-og", label="Attention With Quanv Layer")
+    ax2.plot(cnn_history.history["val_loss"], "-ob", label="Baseline CNN")
+    ax2.plot(qcnn_history.history["val_loss"], "-og", label="Quantum CNN")
     ax2.set_ylabel("Loss")
     ax2.set_xlabel("Epoch")
     ax2.legend()

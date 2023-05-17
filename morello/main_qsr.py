@@ -106,7 +106,7 @@ history = model.fit(x=q_train,
                     validation_data=(q_valid, y_valid))
 
 # Save the model
-model.save('checkpoints/' + current_time_stamp + '_demo.hdf5')
+model.save('checkpoints/' + current_time_stamp + '_demo.keras')
 
 print("=== Batch Size:", args.batch_size)
 
